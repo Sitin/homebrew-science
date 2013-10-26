@@ -26,6 +26,14 @@ class Opencv < Formula
   # you don't need unless you're doing video analysis, and some of it isn't
   # in Homebrew anyway. Will depend on openexr if it's installed.
   depends_on 'ffmpeg' => :optional
+  
+  def patches
+    #
+    # Fixes iSight camera capture for OpenCV 2.4.6.1.
+    # Similar to Macports patch https://trac.macports.org/browser/trunk/dports/graphics/opencv/files/patch-issue-3156.diff
+    #
+    "https://gist.github.com/Sitin/7172726/raw/580e6d29d4b88bc4172741f5a5a54cee30cd91e7/cap_qtkit.mm.diff"
+  end
 
   def install
     args = std_cmake_args + %W[
